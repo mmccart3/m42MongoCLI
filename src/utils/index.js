@@ -9,6 +9,14 @@ class Movie {
         // code to log a film to the database
         await movieCollection.insertOne(this);
     };
+    async update(movieCollection, updateObj) {
+        console.log("entering update in index")
+        await movieCollection.updateOne(this, {$set: updateObj});
+    }
+    async delete(movieCollection) {
+        console.log("entering delete in index")
+        await movieCollection.deleteOne(this);
+    }
 };
 
 module.exports = Movie;

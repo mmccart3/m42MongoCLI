@@ -16,10 +16,29 @@ async function app (yargsObject) {
         // code to read the Movie document
     } else if (yargsObject.update) {
         console.log("entering update functionality")
+        // OPTION 1
+        // --------
+        // const searchObj = new Movie(yargsObject.title,yargsObject.actor, yargsObject.director);
+        // const updateObj = {actor: yargsObject.newActor};
+        // await searchObj.update(movieCollection, updateObj);
+
+        //OPTION 2
+        //--------
+        await movieCollection.updateOne({title: yargsObject.title}, {$set: {actor: yargsObject.actor}})
         // code to update a record in the Movie document
     } else if (yargsObject.delete) {
-        console.log("entering delete functionality")
+        console.log("entering delete functionality");
+        // OPTION 1
+        // --------
+        // const deleteObject = new Movie (yargsObject.title, yargsObject.actor, yargsObject.director);
+        // await deleteObject.delete(movieCollection);
         // code to delete a movie
+
+        // OPTION 2
+        // --------
+
+        await movieCollection.deleteOne({title: yargsObject.title});
+        
     } else {
         console.log("Command not recognised");
     };
